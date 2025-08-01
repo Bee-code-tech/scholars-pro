@@ -231,14 +231,14 @@ const ScholarsProTeaser: React.FC = () => {
           <div className="relative overflow-hidden">
             <motion.div 
               className="flex space-x-4"
-              animate={{ x: [-2000, 0] }}
+              animate={{ x: [-2000, -10] }}
               transition={{
                 duration: 30,
                 repeat: Infinity,
                 ease: "linear"
               }}
             >
-              {[...schools, ...schools].map((school, index) => (
+              {[...schools, ...schools].reverse().map((school, index) => (
                 <div
                   key={`${school.name}-${index}`}
                   className="flex-shrink-0 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-4 min-w-[150px] text-center hover:bg-white/20 transition-all duration-300 "
@@ -258,7 +258,7 @@ const ScholarsProTeaser: React.FC = () => {
 
         {/* Trust Indicators */}
         <motion.div variants={itemVariants} className="text-center">
-          <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8 text-purple-200">
+          <div className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-8 text-purple-200">
             <div className="flex items-center">
               <span className="text-yellow-400 mr-2 text-lg">🏆</span>
               <span className="text-sm">Top PUTME Scores Guaranteed</span>
