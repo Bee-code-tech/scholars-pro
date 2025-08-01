@@ -231,14 +231,14 @@ const ScholarsProTeaser: React.FC = () => {
           <div className="relative overflow-hidden">
             <motion.div 
               className="flex space-x-4"
-              animate={{ x: [-2000, -10] }}
+              animate={{ x: [0, -2000] }}
               transition={{
                 duration: 30,
                 repeat: Infinity,
                 ease: "linear"
               }}
             >
-              {[...schools, ...schools].reverse().map((school, index) => (
+              {[...schools, ...schools].map((school, index) => (
                 <div
                   key={`${school.name}-${index}`}
                   className="flex-shrink-0 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-4 min-w-[150px] text-center hover:bg-white/20 transition-all duration-300 "
