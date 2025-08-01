@@ -1,6 +1,7 @@
 'use client'
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
+import Link from 'next/link';
 
 const ScholarsProTeaser: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState<number>(180); 
@@ -33,18 +34,18 @@ const ScholarsProTeaser: React.FC = () => {
   };
 
   const schools = [
-    { name: "UNILAG", fullName: "University of Lagos" },
-    { name: "UI", fullName: "University of Ibadan" },
-    { name: "OAU", fullName: "Obafemi Awolowo University" },
-    { name: "UNILORIN", fullName: "University of Ilorin" },
-    { name: "UNIBEN", fullName: "University of Benin" },
-    { name: "UNN", fullName: "University of Nigeria, Nsukka" },
-    { name: "OOU", fullName: "Olabisi Onabanjo University" },
-    { name: "DELSU", fullName: "Delta State University" },
-    { name: "LAUTECH", fullName: "Ladoke Akintola University of Technology" },
-    { name: "FUOYE", fullName: "Federal University Oye-Ekiti" },
-    { name: "S.O.N", fullName: "Schools Of Nursing" },
-    { name: "UNIPORT", fullName: "University of Port Harcourt" }
+    { name: "UNILAG", fullName: "University of Lagos", image: "/unilag.png" },
+    { name: "UI", fullName: "University of Ibadan", image: "/ui.png" },
+    { name: "OAU", fullName: "Obafemi Awolowo University", image: "/oau.png" },
+    { name: "UNILORIN", fullName: "University of Ilorin", image: "/unilorin.png" },
+    { name: "UNIBEN", fullName: "University of Benin", image: "/uniben.png" },
+    { name: "UNN", fullName: "University of Nigeria, Nsukka", image: "/unn.png" },
+    { name: "OOU", fullName: "Olabisi Onabanjo University", image: "/oou.png" },
+    { name: "DELSU", fullName: "Delta State University", image: "/delsu.png" },
+    { name: "LAUTECH", fullName: "Ladoke Akintola University of Technology", image: "/lautech.png" },
+    { name: "FUOYE", fullName: "Federal University Oye-Ekiti", image: "/fuoye.png" },
+    { name: "S.O.N", fullName: "Schools Of Nursing", image: "/nursing.png" },
+    { name: "UNIPORT", fullName: "University of Port Harcourt", image: "/uniport.png" },
   ];
 
   const containerVariants: Variants = {
@@ -91,7 +92,7 @@ const ScholarsProTeaser: React.FC = () => {
   const time = formatTime(timeLeft);
 
   return (
-    <section className=" w-full min-h-screen pb-8 h-full bg-gradient-to-br from-purple-900 via-[#47007B] to-[#9300FF] relative ">
+    <section className="overflow-x-hidden w-full min-h-screen pb-8 h-full bg-gradient-to-br from-purple-900 via-[#47007B] to-[#9300FF] relative ">
       {/* Animated Background Elements */}
       <div className="absolute inset-0">
         <div className="absolute top-20 left-10 w-72 h-72 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full blur-3xl opacity-60 animate-pulse"></div>
@@ -133,10 +134,10 @@ const ScholarsProTeaser: React.FC = () => {
             {/* Main Heading */}
             <motion.div variants={itemVariants} className="mb-3 sm:mb-8">
               <h1 className="text-xl sm:text-3xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-1">
-                We produced{' '}
-                <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400">
+                We produced
+                <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400 ml-1">
                   368 & 351 scores
-                </span>{' '}
+                </span>
                 <br />
                 in the 2025 UTME. And we're set to do more in
                 <span className="text-yellow-400 font-bold ml-1">POST-UTME</span>
@@ -144,11 +145,7 @@ const ScholarsProTeaser: React.FC = () => {
             
             </motion.div>
 
-            {/* Subheading */}
-            {/* <motion.p variants={itemVariants} className="text-base sm:text-lg md:text-xl text-purple-100 mb-8 sm:mb-10 lg:mb-12 max-w-3xl mx-auto leading-relaxed">
-              For all institutions and departments. Join thousands of successful students who achieved their dreams with our proven methods.
-            </motion.p> */}
-
+          
             {/* Countdown Timer */}
             <motion.div variants={itemVariants} className="mb-4 sm:mb-10">
               <AnimatePresence>
@@ -193,6 +190,7 @@ const ScholarsProTeaser: React.FC = () => {
             </motion.div>
 
             {/* CTA Button */}
+            <Link href='https://chat.whatsapp.com/HKkVES7nzpIDhLHhnQADEi' >    
             <motion.div variants={itemVariants} className="mb-6 sm:mb-16">
               <motion.button
                 variants={buttonVariants}
@@ -223,22 +221,19 @@ const ScholarsProTeaser: React.FC = () => {
                 </span>
               </motion.button>
             </motion.div>
+            </Link>
           </div>
         </div>
 
         {/* Schools Marquee */}
         <motion.div variants={itemVariants} className="mb-8">
-          <div className="text-center mb-6">
-            <h3 className="text-lg sm:text-xl font-semibold text-white mb-2">Covering All Nigerian Institutions</h3>
-            {/* <p className="text-purple-200 text-sm">Schools of Nursing and many more institutions included</p> */}
-          </div>
           
           <div className="relative overflow-hidden">
             <motion.div 
               className="flex space-x-4"
-              animate={{ x: [-1200, 0] }}
+              animate={{ x: [-2000, 0] }}
               transition={{
-                duration: 20,
+                duration: 30,
                 repeat: Infinity,
                 ease: "linear"
               }}
@@ -246,11 +241,11 @@ const ScholarsProTeaser: React.FC = () => {
               {[...schools, ...schools].map((school, index) => (
                 <div
                   key={`${school.name}-${index}`}
-                  className="flex-shrink-0 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-3 min-w-[150px] text-center hover:bg-white/20 transition-all duration-300"
+                  className="flex-shrink-0 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-4 min-w-[150px] text-center hover:bg-white/20 transition-all duration-300 "
                 >
-                  <div className="w-8 h-8 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full flex items-center justify-center mx-auto mb-2">
-                    <span className="text-purple-900 font-bold text-sm">
-                      {school.name.charAt(0)}
+                  <div className="w-10 h-8   flex items-center justify-center mx-auto mb-2 rounded-lg">
+                    <span className="flex items-center justify-center">
+                      <img src={school.image} alt={school.name} className="w-10 h-12 object-cover" />
                     </span>
                   </div>
                   <div className="text-white font-semibold text-sm mb-1">{school.name}</div>
