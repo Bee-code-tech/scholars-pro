@@ -138,12 +138,10 @@ const ScholarsProTeaser: React.FC = () => {
                   368 & 351 scores
                 </span>{' '}
                 <br />
-                in the 2025 UTME
+                in the 2025 UTME. And we're set to do more in
+                <span className="text-yellow-400 font-bold ml-1">POST-UTME</span>
               </h1>
-              <p className="text-lg sm:text-xl lg:text-2xl text-purple-200 font-medium">
-                And we're set to do more in{' '}
-                <span className="text-yellow-400 font-bold">POST-UTME</span>
-              </p>
+            
             </motion.div>
 
             {/* Subheading */}
@@ -268,16 +266,16 @@ const ScholarsProTeaser: React.FC = () => {
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-4 sm:space-y-0 sm:space-x-8 text-purple-200">
             <div className="flex items-center">
               <span className="text-yellow-400 mr-2 text-lg">🏆</span>
-              <span className="text-sm">Top UTME Scores Guaranteed</span>
+              <span className="text-sm">Top PUTME Scores Guaranteed</span>
             </div>
             <div className="flex items-center">
               <span className="text-yellow-400 mr-2 text-lg">👥</span>
-              <span className="text-sm">5000+ Successful Students</span>
+              <span className="text-sm">1000+ Admissions Secured</span>
             </div>
-            <div className="flex items-center">
+            {/* <div className="flex items-center">
               <span className="text-yellow-400 mr-2 text-lg">⭐</span>
               <span className="text-sm">100% Success Rate</span>
-            </div>
+            </div> */}
           </div>
         </motion.div>
       </motion.div>
