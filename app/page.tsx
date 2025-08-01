@@ -191,7 +191,7 @@ const ScholarsProTeaser: React.FC = () => {
 
             {/* CTA Button */}
             <Link href='https://chat.whatsapp.com/HKkVES7nzpIDhLHhnQADEi' >    
-            <motion.div variants={itemVariants} className="mb-6 sm:mb-16">
+            <motion.div variants={itemVariants} className="mb-8 sm:mb-16">
               <motion.button
                 variants={buttonVariants}
                 initial="idle"
