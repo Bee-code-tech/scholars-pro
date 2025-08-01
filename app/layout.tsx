@@ -13,7 +13,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "ScolarsPro Academy",
+  title: "ScholarsPro Academy",
   description: "Empowering Future Scholars",
 };
 
