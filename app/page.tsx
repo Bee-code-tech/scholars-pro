@@ -39,7 +39,7 @@ const ScholarsProTeaser: React.FC = () => {
     { name: "OAU", fullName: "Obafemi Awolowo University", image: "/oau.png" },
     { name: "UNILORIN", fullName: "University of Ilorin", image: "/unilorin.png" },
     { name: "UNIBEN", fullName: "University of Benin", image: "/uniben.png" },
-    { name: "UNN", fullName: "University of Nigeria, Nsukka", image: "/unn.png" },
+    { name: "UNN", fullName: "University of Nigeria, Nsukka", image: "/unnn.png" },
     { name: "OOU", fullName: "Olabisi Onabanjo University", image: "/oou.png" },
     { name: "DELSU", fullName: "Delta State University", image: "/delsu.png" },
     { name: "LAUTECH", fullName: "Ladoke Akintola University of Technology", image: "/lautech.png" },
@@ -226,7 +226,7 @@ const ScholarsProTeaser: React.FC = () => {
         </div>
 
         {/* Schools Marquee */}
-        <motion.div variants={itemVariants} className="mb-8">
+        <motion.div variants={itemVariants} className="mb-6">
           
           <div className="relative overflow-hidden">
             <motion.div 
