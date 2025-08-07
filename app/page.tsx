@@ -179,7 +179,7 @@ const ScholarsProTeaser: React.FC = () => {
                   {scholarsData.highlightedScores}
                 </span>
                 <br />
-                in the {scholarsData.year} UTME. And we're set to do more in
+                {scholarsData.year}
                 <span className="text-yellow-400 font-bold ml-1">{scholarsData.postUtmeText}</span>
               </h1>
             </motion.div>
