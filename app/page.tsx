@@ -2,13 +2,45 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import Link from 'next/link';
+import { client } from '@/lib/sanity';
+
+interface ScholarsProData {
+  badge: string;
+  mainHeading: string;
+  highlightedScores: string;
+  year: string;
+  postUtmeText: string;
+  whatsappLink: string;
+  expiredMessage: string;
+  trustIndicator1: string;
+  trustIndicator2: string;
+}
 
 const ScholarsProTeaser: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState<number>(180); 
   const [isExpired, setIsExpired] = useState<boolean>(false);
+  const [scholarsData, setScholarsData] = useState<ScholarsProData | null>(null);
 
+  // Fetch scholars data from Sanity
   useEffect(() => {
-    // Reset timer on page visit
+    client
+      .fetch(`*[_type == "scholarsPro"][0]{
+        badge,
+        mainHeading,
+        highlightedScores,
+        year,
+        postUtmeText,
+        whatsappLink,
+        expiredMessage,
+        trustIndicator1,
+        trustIndicator2
+      }`)
+      .then((data: ScholarsProData) => setScholarsData(data))
+      .catch(console.error);
+  }, []);
+
+  // Simulated countdown - resets on every page refresh
+  useEffect(() => {
     setTimeLeft(180); 
     setIsExpired(false);
     
@@ -26,13 +58,13 @@ const ScholarsProTeaser: React.FC = () => {
     return () => clearInterval(timer);
   }, []);
 
-  const formatTime = (seconds: number): {  minutes: number; secs: number } => {
-  
+  const formatTime = (seconds: number): { minutes: number; secs: number } => {
     const minutes = Math.floor((seconds % 3600) / 60);
     const secs = seconds % 60;
     return { minutes, secs };
   };
 
+  // Static schools data (as requested)
   const schools = [
     { name: "UNILAG", fullName: "University of Lagos", image: "/unilag.png" },
     { name: "UI", fullName: "University of Ibadan", image: "/ui.png" },
@@ -91,6 +123,17 @@ const ScholarsProTeaser: React.FC = () => {
 
   const time = formatTime(timeLeft);
 
+  // Loading state
+  if (!scholarsData) {
+    return (
+      <section className="overflow-x-hidden w-full min-h-screen pb-8 h-full bg-gradient-to-br from-purple-900 via-[#47007B] to-[#9300FF] relative">
+        <div className="flex items-center justify-center h-full">
+          <div className="animate-pulse text-white">Loading...</div>
+        </div>
+      </section>
+    );
+  }
+
   return (
     <section className="overflow-x-hidden w-full min-h-screen pb-8 h-full bg-gradient-to-br from-purple-900 via-[#47007B] to-[#9300FF] relative ">
       {/* Animated Background Elements */}
@@ -113,10 +156,7 @@ const ScholarsProTeaser: React.FC = () => {
             <div className="w-45 h-16 flex items-center ">
             <img src="/logo.png" alt="Scholars Pro Logo" className='object-cover w-full  block' />
             </div>
-            {/* </div> */}
-            
           </div>
-          
         </motion.header>
 
         {/* Main Content */}
@@ -126,7 +166,7 @@ const ScholarsProTeaser: React.FC = () => {
             <motion.div variants={itemVariants} className="mb-6">
               <div className="inline-flex items-center bg-gradient-to-r from-yellow-400/20 to-orange-400/20 border border-yellow-400/30 rounded-full px-4 sm:px-6 py-2 sm:py-3">
                 <span className="text-yellow-300 font-semibold text-sm sm:text-base">
-                  ⭐ 3 DAYS FREE POST-UTME CLASS
+                  ⭐ {scholarsData.badge}
                 </span>
               </div>
             </motion.div>
@@ -134,18 +174,16 @@ const ScholarsProTeaser: React.FC = () => {
             {/* Main Heading */}
             <motion.div variants={itemVariants} className="mb-3 sm:mb-8">
               <h1 className="text-xl sm:text-3xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-1">
-                We produced
+                {scholarsData.mainHeading}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-orange-400 ml-1">
-                  368 & 351 scores
+                  {scholarsData.highlightedScores}
                 </span>
                 <br />
-                in the 2025 UTME. And we're set to do more in
-                <span className="text-yellow-400 font-bold ml-1">POST-UTME</span>
+                in the {scholarsData.year} UTME. And we're set to do more in
+                <span className="text-yellow-400 font-bold ml-1">{scholarsData.postUtmeText}</span>
               </h1>
-            
             </motion.div>
 
-          
             {/* Countdown Timer */}
             <motion.div variants={itemVariants} className="mb-4 sm:mb-10">
               <AnimatePresence>
@@ -182,7 +220,7 @@ const ScholarsProTeaser: React.FC = () => {
                     className="inline-flex items-center bg-gradient-to-r from-orange-500/20 to-red-500/20 border border-orange-400/30 rounded-full px-4 sm:px-6 py-2 sm:py-3 mb-4"
                   >
                     <span className="text-orange-300 font-medium text-sm sm:text-base lg:text-lg">
-                      🎓 Registration Open - Secure Your Spot Now!
+                      {scholarsData.expiredMessage}
                     </span>
                   </motion.div>
                 )}
@@ -190,7 +228,7 @@ const ScholarsProTeaser: React.FC = () => {
             </motion.div>
 
             {/* CTA Button */}
-            <Link href='https://chat.whatsapp.com/HKkVES7nzpIDhLHhnQADEi' >    
+            <Link href={scholarsData.whatsappLink}>    
             <motion.div variants={itemVariants} className="mb-8 sm:mb-16">
               <motion.button
                 variants={buttonVariants}
@@ -225,9 +263,8 @@ const ScholarsProTeaser: React.FC = () => {
           </div>
         </div>
 
-        {/* Schools Marquee */}
+        {/* Schools Marquee - Static Images */}
         <motion.div variants={itemVariants} className="mb-6">
-          
           <div className="relative overflow-hidden">
             <motion.div 
               className="flex space-x-4"
@@ -243,7 +280,7 @@ const ScholarsProTeaser: React.FC = () => {
                   key={`${school.name}-${index}`}
                   className="flex-shrink-0 bg-white/10 backdrop-blur-sm border border-white/20 rounded-xl px-4 py-4 min-w-[150px] text-center hover:bg-white/20 transition-all duration-300 "
                 >
-                  <div className="w-10 h-8   flex items-center justify-center mx-auto mb-2 rounded-lg">
+                  <div className="w-10 h-8 flex items-center justify-center mx-auto mb-2 rounded-lg">
                     <span className="flex items-center justify-center">
                       <img src={school.image} alt={school.name} className="w-10 h-12 object-cover" />
                     </span>
@@ -261,16 +298,12 @@ const ScholarsProTeaser: React.FC = () => {
           <div className="flex flex-col sm:flex-row justify-center items-center space-y-2 sm:space-y-0 sm:space-x-8 text-purple-200">
             <div className="flex items-center">
               <span className="text-yellow-400 mr-2 text-lg">🏆</span>
-              <span className="text-sm">High PUTME Scores Guaranteed</span>
+              <span className="text-sm">{scholarsData.trustIndicator1}</span>
             </div>
             <div className="flex items-center">
               <span className="text-yellow-400 mr-2 text-lg">👥</span>
-              <span className="text-sm">1000+ Admissions Secured</span>
+              <span className="text-sm">{scholarsData.trustIndicator2}</span>
             </div>
-            {/* <div className="flex items-center">
-              <span className="text-yellow-400 mr-2 text-lg">⭐</span>
-              <span className="text-sm">100% Success Rate</span>
-            </div> */}
           </div>
         </motion.div>
       </motion.div>
