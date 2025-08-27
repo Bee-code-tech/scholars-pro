@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, Variants } from 'framer-motion';
 import Link from 'next/link';
 import { client } from '@/lib/sanity';
+import { useRouter } from 'next/navigation';
 
 interface ScholarsProData {
   badge: string;
@@ -21,6 +22,7 @@ const ScholarsProTeaser: React.FC = () => {
   const [timeLeft, setTimeLeft] = useState<number>(180); 
   const [isExpired, setIsExpired] = useState<boolean>(false);
   const [scholarsData, setScholarsData] = useState<ScholarsProData | null>(null);
+  const router = useRouter()
 
   // Fetch scholars data from Sanity
   useEffect(() => {
@@ -59,6 +61,15 @@ const ScholarsProTeaser: React.FC = () => {
 
     return () => clearInterval(timer);
   }, []);
+
+  const handleCtaClick = (url: string) => {
+    if (typeof window !== "undefined" && (window as any).fbq) {
+      (window as any).fbq("track", "Lead");
+    }
+    setTimeout(() => {
+      router.push(url);
+    }, 300);
+  };
 
   const formatTime = (seconds: number): { minutes: number; secs: number } => {
     const minutes = Math.floor((seconds % 3600) / 60);
@@ -237,7 +248,7 @@ const ScholarsProTeaser: React.FC = () => {
             </motion.div>
 
             {/* Dynamic CTA Button */}
-            <Link href={scholarsData.buttonLink}>    
+            <div onClick={ () => handleCtaClick(scholarsData.buttonLink)}>    
             <motion.div variants={itemVariants} className="mb-8 sm:mb-16">
               <motion.button
                 variants={dynamicButtonVariants}
@@ -266,7 +277,7 @@ const ScholarsProTeaser: React.FC = () => {
                 </span>
               </motion.button>
             </motion.div>
-            </Link>
+            </div>
           </div>
         </div>
 
