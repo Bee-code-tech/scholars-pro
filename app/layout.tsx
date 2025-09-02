@@ -39,7 +39,7 @@ s.parentNode.insertBefore(t,s)}(window, document,'script',
 'https://connect.facebook.net/en_US/fbevents.js');
 fbq('init', '2136669700195672');
 fbq('track', 'PageView');
-fbq('track', 'Lead');
+fbq('track', 'lead');
       `,
     }}
   />
